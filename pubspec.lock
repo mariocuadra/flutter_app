@@ -107,7 +107,7 @@ packages:
     source: hosted
     version: "0.3.1+1"
   firebase_core:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -127,25 +127,18 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
-  firebase_storage:
-    dependency: "direct main"
-    description:
-      name: firebase_storage
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.0-dev.3"
-  firebase_storage_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_storage_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0-dev.2"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_facebook_auth:
+    dependency: "direct main"
+    description:
+      name: flutter_facebook_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
