@@ -12,11 +12,12 @@ class ButtonsBar extends StatelessWidget {
         ),
         child: Row(
           children: <Widget>[
-            CircleButton(true, Icons.turned_in_not, 20.0, Color.fromRGBO(255, 255, 255, 1)),
-            CircleButton(true, Icons.card_travel, 20.0, Color.fromRGBO(255, 255, 255, 0.6)),
-            CircleButton(false, Icons.add, 40.0, Color.fromRGBO(255, 255, 255, 1)),
-            CircleButton(true, Icons.mail_outline, 20.0, Color.fromRGBO(255, 255, 255, 0.6)),
-            CircleButton(true, Icons.person, 20.0, Color.fromRGBO(255, 255, 255, 0.6))
+            //cambiar la contrasena
+            CircleButton(true, Icons.vpn_key, 20.0, Color.fromRGBO(255, 255, 255, 1), ()=>{}),
+            //se agrega un nuevo lugar
+            CircleButton(true, Icons.add, 20.0, Color.fromRGBO(255, 255, 255, 0.6),()=>{}),
+            //cerrar sesion
+            CircleButton(false, Icons.exit_to_app, 40.0, Color.fromRGBO(255, 255, 255, 1),()=>{}),
           ],
         )
     );

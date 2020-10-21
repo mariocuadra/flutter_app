@@ -56,10 +56,12 @@ class FireBaseAuthAPI{
     return null;
   }
 
-  Future<void> signOutGoogle() async {
-    await googleSignIn.signOut();
+  Future<void> signOut() async {
+    
+    await _auth.signOut().then((value) => print("Sesion cerrada")); //cierre de sesion en firebase
+    googleSignIn.signOut(); //cierre de sesion en google
+    print("Sesiones cerradas");
 
-    print("User Signed Out");
   }
 
 
