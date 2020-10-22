@@ -27,9 +27,12 @@ class _SignInScreen extends State<SignInScreen> {
 
   Widget _handleCurrentSession() {
     return StreamBuilder(
+      //detecta si la sesion cambia de estado
       stream: userBloc.authStatus,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (!snapshot.hasData || snapshot.hasError) {
+
+          //Ejecucion de trigger de pantallas
           return signInGoogleUI();
         } else {
           return PlatziTripsCupertino();
