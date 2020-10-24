@@ -1,14 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/User/bloc/bloc_user.dart';
+import 'package:flutter_app/User/model/user_attribute.dart';
+import 'package:flutter_app/users_info.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import '../../../user_info.dart';
 import '../../../button_bar.dart';
 
 class ProfileHeader extends StatelessWidget {
 
   UserBloc userBloc;
-  User user;
+  UserAttribute userAttribute;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ProfileHeader extends StatelessWidget {
 
     //StreamBuilder es un codigo que permite mantener alerta respecto de los estados de los demas API como google o firebase
     return StreamBuilder(
-    stream: userBloc.streamFirebase,
+    stream: userBloc.streamFirebase, // elflujo de alerta
     builder:(BuildContext context, AsyncSnapshot snapshot){
       switch (snapshot.connectionState) {
          case ConnectionState.waiting:
@@ -25,7 +26,7 @@ class ProfileHeader extends StatelessWidget {
               return CircularProgressIndicator(); //barra de progreso
         case ConnectionState.active:
         case ConnectionState.done:
-          return null;
+          return showProfieData(snapshot);
       }
     },
     );
@@ -51,7 +52,10 @@ class ProfileHeader extends StatelessWidget {
 
     }else{
         print("Logeado");
-        print(snapshot.data)
+        userAttribute = UserAttribute(name: snapshot.data.displayName, email: snapshot.data.email, photoUrl: snapshot.data.photoUrl);
+        print(snapshot.data);
+
+
         final title = Text(
           'Profile',
           style: TextStyle(
@@ -74,7 +78,7 @@ class ProfileHeader extends StatelessWidget {
             children: <Widget>[
             ],
           ),
-          UserInfo(assets/img/ann.jpg', 'Anahí Salgado','anahi@platzi.com'),
+          UsersInfo(userAttribute),
           ButtonsBar()
         ],
       ),

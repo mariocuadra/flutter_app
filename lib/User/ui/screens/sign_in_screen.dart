@@ -50,7 +50,7 @@ class _SignInScreen extends State<SignInScreen> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Bienvenido mathias",
+                  Text("Bienvenido ",
                   style: TextStyle(
                     fontSize: 37.0,
                     fontFamily: "Lato",
@@ -60,6 +60,7 @@ class _SignInScreen extends State<SignInScreen> {
                  ),
                   ButtonGreen(text: "Login with gmail",
                       onPressed: ( ) {
+                    userBloc.signOut();
                     userBloc.signIn();
 
                   },

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class place {
+class Place {
 
   String name;
   String where;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class User {
+class UserAttribute {
 
   final String name;
   final String email;
@@ -9,7 +9,7 @@ class User {
   // myfavoritePlace
  // Myplaces.
 
-  User({
+  UserAttribute({
 
         Key key,
         @required this.name,
