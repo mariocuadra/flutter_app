@@ -11,19 +11,17 @@ class CloudFirestoreAPI{
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   Future<void> addUser(UserAttribute user) {
-
     return users
-        .add({'uid':user.uid,
-              'name':user.name,
-              'email':user.email,
-              'photoURL': user.photoUrl,
-              'myPlaces': user.myPlaces,
-              'myFavoritePlaces': user.myFavoritePlaces,
-              'lastSignIn': DateTime.now()
-        })
+        .add({'uid': user.uid,
+      'name': user.name,
+      'email': user.email,
+      'photoURL': user.photoUrl,
+      'myPlaces': user.myPlaces,
+      'myFavoritePlaces': user.myFavoritePlaces,
+      'lastSignIn': DateTime.now()
+    })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
-
-
+  }
 
 }

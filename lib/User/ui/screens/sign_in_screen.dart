@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/User/bloc/bloc_user.dart';
+import 'package:flutter_app/User/model/user_attribute.dart';
 import 'package:flutter_app/platzi_trips_cupertino.dart';
 import 'package:flutter_app/widgets/gradient_back.dart';
 import 'package:flutter_app/widgets/button_green.dart';
@@ -64,7 +65,10 @@ class _SignInScreen extends State<SignInScreen> {
                     userBloc.signIn();
 
 
+
                   },
+                  ),
+
                     width: 300.0,
                     height: 50.0,
                   )
