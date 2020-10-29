@@ -5,15 +5,25 @@ import 'package:flutter_app/User/model/user_attribute.dart';
 
 class CloudFirestoreAPI{
 
-  final  String USERS ="users";
+  final  String USERS ='users';
   final  String PLACE ="places";
 
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<void> addUser(UserAttribute user) {
 
-  Future<void> updateUserData(UserAttribute user) {
-    CollectionReference users = _firestore.collection(USERS);
-    DocumentReference ref = users.doc(user.uid);
+    return users
+        .add({'uid':user.uid,
+              'name':user.name,
+              'email':user.email,
+              'photoURL': user.photoUrl,
+              'myPlaces': user.myPlaces,
+              'myFavoritePlaces': user.myFavoritePlaces,
+              'lastSignIn': DateTime.now()
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+
   }
 
 }
