@@ -7,13 +7,13 @@ class CloudFirestoreAPI{
 
   final  String USERS ="users";
   final  String PLACE ="places";
-
+  final bool merge =true;
 
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> updateUserData(UserAttribute user) {
-    CollectionReference users = _firestore.collection(USERS);
-    DocumentReference ref = users.doc(user.uid);
-  }
+  Future<void> updateUserData(UserAttribute user) async {
+
+
+   }
 
 }
