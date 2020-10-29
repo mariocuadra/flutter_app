@@ -63,6 +63,7 @@ class _SignInScreen extends State<SignInScreen> {
                     userBloc.signOut();
                     userBloc.signIn();
 
+
                   },
                     width: 300.0,
                     height: 50.0,
