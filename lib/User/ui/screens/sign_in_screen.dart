@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/User/bloc/bloc_user.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
+import 'package:flutter_app/User/repository/firebase_auth_api.dart';
 import 'package:flutter_app/platzi_trips_cupertino.dart';
+import 'package:flutter_app/users_info.dart';
 import 'package:flutter_app/widgets/gradient_back.dart';
 import 'package:flutter_app/widgets/button_green.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
@@ -62,12 +64,17 @@ class _SignInScreen extends State<SignInScreen> {
                   ButtonGreen(text: "Login with gmail",
                       onPressed: ( ) {
                     userBloc.signOut();
-                    userBloc.signIn();
-
-
-
+                    FireBaseAuthAPI user;
+                    userBloc.signIn().then((user) {
+                      userBloc.addUserData( UserAttribute(
+                        uid: user.uid,
+                        name: user.displayName,
+                        email: user.email,
+                        photoUrl: user.photoURL
+                      ));
+                    });
                   },
-                  ),
+
 
                     width: 300.0,
                     height: 50.0,

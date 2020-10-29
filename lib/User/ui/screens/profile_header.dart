@@ -18,7 +18,7 @@ class ProfileHeader extends StatelessWidget {
 
     //StreamBuilder es un codigo que permite mantener alerta respecto de los estados de los demas API como google o firebase
     return StreamBuilder(
-    stream: userBloc.streamFirebase, // elflujo de alerta
+    stream: userBloc.streamFirebase, // el flujo de alerta
     builder:(BuildContext context, AsyncSnapshot snapshot){
       switch (snapshot.connectionState) {
          case ConnectionState.waiting:

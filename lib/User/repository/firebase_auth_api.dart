@@ -11,7 +11,8 @@ class FireBaseAuthAPI{
   String email;
   String imageUrl;
 
-  Future<String> signInWithGoogle() async {
+  Future<User> signInWithGoogle() async {
+
     await Firebase.initializeApp();
 
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -50,7 +51,7 @@ class FireBaseAuthAPI{
 
       print('signInWithGoogle succeeded: $user');
 
-      return '$user';
+      return user;
     }
 
     return null;

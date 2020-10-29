@@ -20,7 +20,8 @@ class UserBloc implements Bloc{
   //Caso Uso
   //1. SignIn a la aplicacion Google
 
-  Future<String> signIn(){
+  Future<User> signIn() {
+
 
     return _auth_repository.signInFirebase();
 
@@ -34,7 +35,9 @@ class UserBloc implements Bloc{
   Future<void> addUserData(UserAttribute user) => _cloudFirestoreRepository.addUserData(user);
 
   signOut(){
+
     _auth_repository.signOut();
+
   }
 
 
