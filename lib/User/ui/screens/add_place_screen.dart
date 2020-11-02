@@ -29,7 +29,11 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   width: 45.0,
                   child: IconButton(
                     icon: Icon(Icons.add_to_photos, color: Colors.white, size: 45,) ,
-                    onPressed: ,
+                    onPressed:(){
+                      
+                      Navigator.pop(context);
+
+                    },
                   )
                 )
               )
