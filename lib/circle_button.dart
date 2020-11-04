@@ -10,7 +10,7 @@ class CircleButton extends StatefulWidget {
   String heroCircle;
 
 
-  CircleButton(this.mini, this.icon, this.iconSize, this.color,@required this.heroCircle, @required this.onPressed );
+  CircleButton(this.mini, this.icon, this.iconSize, this.color,@required String heroCircle, @required this.onPressed );
 
   @override
   State<StatefulWidget> createState() {
@@ -28,9 +28,8 @@ class _CircleButton extends State<CircleButton> {
     return Expanded(
 
         child: FloatingActionButton(
-          heroTag: widget.heroCircle,
 
-          backgroundColor: widget.color,
+         backgroundColor: widget.color,
           mini: widget.mini,
           onPressed: widget.onPressed,
           child: Icon(
@@ -38,6 +37,7 @@ class _CircleButton extends State<CircleButton> {
             size: widget.iconSize,
             color: Color(0xFF4268D3),
           ),
+          heroTag: widget.heroCircle,
         )
     );
   }

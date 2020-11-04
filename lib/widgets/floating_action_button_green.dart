@@ -34,7 +34,7 @@ class _FloatingActionButtonGreen extends State<FloatingActionButtonGreen> {
       child: Icon(
         Icons.favorite_border
       ),
-      heroTag: null,
+      heroTag: null, /*Este valor permite que*/
     );
   }
 
