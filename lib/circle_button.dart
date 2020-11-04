@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CircleButton extends StatefulWidget {
 
   final VoidCallback onPressed; // propiedad que recibe un metodo
-  bool mini;
+  bool mini =true;
   var icon;
   double iconSize;
   var color;

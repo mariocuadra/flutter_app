@@ -22,9 +22,9 @@ class ButtonsBar extends StatelessWidget {
         child: Row(
           children: <Widget>[
             //cambiar la contrasena
-            CircleButton(true, Icons.vpn_key, 20.0, Color.fromRGBO(255, 255, 255, 1),"clave",()=>{}),
+            CircleButton(true, Icons.vpn_key, 20.0, Color.fromRGBO(255, 255, 255, 0.6),"clave",()=>{}),
             //se agrega un nuevo lugar
-            CircleButton(true, Icons.add, 20.0, Color.fromRGBO(255, 255, 255, 0.6),'Nlugar',()
+            CircleButton(false, Icons.add, 40.0, Color.fromRGBO(255, 255, 255, 1),'Nlugar',()
             {
 
               File image;
@@ -36,7 +36,7 @@ class ButtonsBar extends StatelessWidget {
 
             }),
             //cerrar sesion
-            CircleButton(false, Icons.exit_to_app, 20.0, Color.fromRGBO(255, 255, 255, 1),"cerrarsesion",()=>{
+            CircleButton(false, Icons.exit_to_app, 20.0, Color.fromRGBO(255, 255, 255, 0.6),"cerrarsesion",()=>{
               userBloc.signOut()
             }),
 
