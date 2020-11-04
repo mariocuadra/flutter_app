@@ -102,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'inicio de sesion por gmail',
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),

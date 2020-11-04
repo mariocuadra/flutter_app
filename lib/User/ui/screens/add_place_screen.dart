@@ -11,11 +11,15 @@ AddPlaceScreen(this.image);
 
   @override
   _AddPlaceScreenState createState() => _AddPlaceScreenState();
+
 }
 
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
+
+
   @override
   Widget build(BuildContext context) {
+    print('Entro a la clase addplacescreen');
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -27,13 +31,17 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 child:SizedBox(
                   height: 45.0,
                   width: 45.0,
+                  child :Hero(
+                    tag: 'agregar_fotos',
                   child: IconButton(
                     icon: Icon(Icons.add_to_photos, color: Colors.white, size: 45,) ,
+
                     onPressed:(){
                       
                       Navigator.pop(context);
 
                     },
+                  ),
                   )
                 )
               )

@@ -66,7 +66,8 @@ class _SignInScreen extends State<SignInScreen> {
                       ),
                     ),
                   ),
-                  ButtonGreen(text: "Login with gmail",
+                  ButtonGreen(
+                    text: "Login with gmail",
                       onPressed: ( ) {
                     userBloc.signOut();
                     FireBaseAuthAPI user;
