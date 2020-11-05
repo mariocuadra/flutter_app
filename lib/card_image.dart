@@ -12,9 +12,9 @@ class  CardImageWithFabIcon extends StatelessWidget {
 
   CardImageWithFabIcon({
         Key key,
-        @required this.pathImage = "assets/img/beach.jpeg" ,
-        @required this.widght = 250.0,
-        @required this.height =350.0,
+        @required this.pathImage = "assets/img/beach_palm.jpeg" ,
+        @required this.widght = 280.0,
+        @required this.height =250.0,
         @required this.onPressedFabIcon,
         @required this.iconData,
         this.left
@@ -26,18 +26,24 @@ class  CardImageWithFabIcon extends StatelessWidget {
     // TODO: implement build
 
     final card = Container(
-      height: height,
+
+      height: 200,
       width: widght,
       margin: EdgeInsets.only(
-         left: left
+         left: left,
+
+
 
       ),
 
       decoration: BoxDecoration(
+
         image: DecorationImage(
           fit: BoxFit.cover,
-            image: AssetImage("assets/img/beach.jpeg") //AssetImage(pathImage)
+
+            image: AssetImage("assets/img/beach_palm.jpeg") //AssetImage(pathImage)
         ),
+
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         shape: BoxShape.rectangle,
         boxShadow: <BoxShadow>[
@@ -49,6 +55,7 @@ class  CardImageWithFabIcon extends StatelessWidget {
         ]
 
       ),
+
     );
 
     return Stack(
