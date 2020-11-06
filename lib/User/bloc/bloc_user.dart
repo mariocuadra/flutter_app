@@ -5,6 +5,8 @@ import 'package:flutter_app/User/repository/cloud_firestore_repository.dart';
 import 'package:flutter_app/User/repository/firebase_auth_api.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
+import '../../place.dart';
+
 
 class UserBloc implements Bloc{
 
@@ -32,7 +34,12 @@ class UserBloc implements Bloc{
 
   final _cloudFirestoreRepository = CloudFirestoreRepository();
 
+  /*Registrar usuario en base de datos*/
   Future<void> addUserData(UserAttribute user) => _cloudFirestoreRepository.addUserData(user);
+
+ /*Registrar lugares visitados por el usuario*/
+  Future<void> updatePlaceData(Place place) => _cloudFirestoreRepository.updatePlaceData(place);
+
 
   signOut(){
 

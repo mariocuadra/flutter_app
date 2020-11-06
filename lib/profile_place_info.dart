@@ -29,7 +29,7 @@ class ProfilePlaceInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                this.place.where,
+                this.place.description,
                 style: TextStyle(
                     color: Color.fromRGBO(0, 0, 0, 0.4),
                     fontFamily: 'Lato',
@@ -38,7 +38,7 @@ class ProfilePlaceInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                this.place.type,
+                this.place.urlImage,
                 style: TextStyle(
                     color: Color.fromRGBO(0, 0, 0, 0.4),
                     fontFamily: 'Lato',
@@ -50,15 +50,7 @@ class ProfilePlaceInfo extends StatelessWidget {
         )
     );
 
-    final steps = Text(
-      'Steps ${this.place.steps}',
-      style: TextStyle(
-          fontFamily: 'Lato',
-          fontSize: 14.0,
-          fontWeight: FontWeight.bold,
-          color: Colors.amber
-      ),
-    );
+
 
     final card = Container(
       width: screenWidth * 0.65,
@@ -79,8 +71,8 @@ class ProfilePlaceInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               place,
-              placeInfo,
-              steps
+              placeInfo
+
             ],
           )
       ),
