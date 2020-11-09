@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/User/bloc/bloc_user.dart';
 import 'package:flutter_app/User/ui/screens/title_input_location.dart';
 import 'package:flutter_app/card_image.dart';
+import 'package:flutter_app/place.dart';
 import 'package:flutter_app/widgets/button_purple.dart';
 import 'package:flutter_app/widgets/gradient_back.dart';
 import 'package:flutter_app/widgets/text_input.dart';
@@ -11,7 +13,7 @@ import 'package:flutter_app/widgets/title_header.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../place.dart';
+
 
 class AddPlaceScreen extends StatefulWidget {
 
@@ -42,7 +44,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
 
     double left =0.0;
     final _controllerTitlePlace = TextEditingController();
-    final _controllerDescriotionPlace = TextEditingController();
+    final _controllerDescriptionPlace = TextEditingController();
 
 
     double screenWidht = MediaQuery.of(context).size.width;
@@ -106,7 +108,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   hintText:"Description",
                   inputType: TextInputType.multiline,
                   maxLines: 4,
-                  controller: _controllerDescriotionPlace,
+                  controller: _controllerDescriptionPlace,
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 20.0),
@@ -122,15 +124,26 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       onPressed: (){
                         //Firebase Storage
                         //Url
+                        // ID del  Usuario que esta logeado actualmente.
+
+                        userBloc.currentUsuario().then((User user) {
+
+                          if (User != null){
+
+                          }
+
+                        });
+
                         //Cloud Firestore
                         //Place  - Title, description, utl userOwner, likes.
                         userBloc.updatePlaceData(Place(
-                          name: _controllerTitlePlace.text,
-                          description: _controllerDescriotionPlace.text,
-                          likes: 0,
-                          
+                        name:_controllerTitlePlace.text,
+                        description: _controllerDescriptionPlace.text,
+                        likes: 0,
 
-                        )).whenComplete(() {
+                        )
+
+                        ).whenComplete(() {
                           print("Termino");
                           Navigator.pop(context);
 
