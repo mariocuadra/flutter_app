@@ -9,14 +9,18 @@ import 'package:flutter_app/widgets/gradient_back.dart';
 import 'package:flutter_app/widgets/text_input.dart';
 import 'package:flutter_app/widgets/title_header.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../place.dart';
 
 class AddPlaceScreen extends StatefulWidget {
 
-File image;
+PickedFile image;
 
-AddPlaceScreen(this.image);
+AddPlaceScreen({
+  Key key,
+  this.image
+});
 
   @override
   _AddPlaceScreenState createState() => _AddPlaceScreenState();
@@ -82,7 +86,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 Container(
                   alignment:Alignment.center ,
                   child: CardImageWithFabIcon(
-                    pathImage:"assets/img/beach_palm.jpeg",  //widget.image.path,
+                    pathImage:widget.image.path,
                     iconData: Icons.camera_alt ,
                     widght: 350.0,
                     height: 200.0,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/User/bloc/bloc_user.dart';
 import 'package:flutter_app/User/ui/screens/add_place_screen.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:image_picker/image_picker.dart';
 import 'circle_button.dart';
 
 class ButtonsBar extends StatelessWidget {
@@ -27,12 +28,24 @@ class ButtonsBar extends StatelessWidget {
             CircleButton(false, Icons.add, 40.0, Color.fromRGBO(255, 255, 255, 1),'Nlugar',()
             {
 
-              File image;
+
+              ImagePicker.platform.pickImage(source: ImageSource.camera)
+                  .then((PickedFile image) {
+
+            if (image != null) {
+              print("Saco la foto");
               Navigator.push(context,
-                  MaterialPageRoute(builder: (BuildContext) => AddPlaceScreen(image),
+              MaterialPageRoute(
 
-              ));
+                    builder: (BuildContext) => AddPlaceScreen(image: image),
 
+                  ));
+            }
+            }).catchError((onError){
+
+                print(" Eror al intentar sacar la foto $onError");
+
+              });
 
             }),
             //cerrar sesion
