@@ -15,7 +15,9 @@ class FirebaseStorageAPI{
 
     }
     _storageReference.child(path).putFile(image);
-   return _storageReference;
+    print("creo la ruta de la imagen $path");
+
+    return _storageReference;
 
 
 

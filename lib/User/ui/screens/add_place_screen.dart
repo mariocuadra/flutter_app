@@ -142,27 +142,39 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                               }
 
 
+                             final  imageUrl = await firebase_storage.TaskState.success;
+                              if(imageUrl == null){
+                                print('Null image URL');
+                                return;
+                              }
+
+                              print('Image url: $imageUrl');
+
+                              //Cloud Firestore
+                              //Place  - Title, description, utl userOwner, likes.
+                              userBloc.updatePlaceData(Place(
+                                name:_controllerTitlePlace.text,
+                                description: _controllerDescriptionPlace.text,
+                                likes: 0,
+                                //urlImage: imageUrl,
+
+                              )
+
+                              ).whenComplete(() {
+                                print("Termino");
+                                Navigator.pop(context);
+
+                              });
 
 
 
                           }
 
-                        });
 
-                        //Cloud Firestore
-                        //Place  - Title, description, utl userOwner, likes.
-                        userBloc.updatePlaceData(Place(
-                        name:_controllerTitlePlace.text,
-                        description: _controllerDescriptionPlace.text,
-                        likes: 0,
-
-                        )
-
-                        ).whenComplete(() {
-                          print("Termino");
-                          Navigator.pop(context);
 
                         });
+
+
 
 
                       },
