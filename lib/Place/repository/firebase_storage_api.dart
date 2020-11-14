@@ -6,12 +6,11 @@ class FirebaseStorageAPI{
 
   final firebase_storage.Reference _storageReference = firebase_storage.FirebaseStorage.instance.ref();
 
-  Future<firebase_storage.UploadTask> uploadFile (String path, File image) async {
+  Future<firebase_storage.UploadTask> uploadFile (String path) async {
 
-    if (image == null){
-      print("No file was selected");
-      return null;
-    }
+    File firebase_storage.UploadTask storageUploadTask = _storageReference.child(path).putFile(image,"image/jpeg");
+
+
 
 
 

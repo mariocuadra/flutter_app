@@ -12,7 +12,7 @@ import 'package:flutter_app/widgets/text_input.dart';
 import 'package:flutter_app/widgets/title_header.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 
 class AddPlaceScreen extends StatefulWidget {
@@ -126,28 +126,55 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         //Url
                         // ID del  Usuario que esta logeado actualmente.
 
-                        userBloc.currentUsuario().then((User user) {
+                        userBloc.currentUsuario().then((User user) async {
 
-                          if (User != null){
+                          if (user != null){
+
+                              String uid = user.uid;
+                              String path ="${uid}/${DateTime.now().toString()}.jpg";
+
+                              File Nfile= File(widget.image.path);
+
+                              final uploadTask = await userBloc.uploadFile('$uid/${DateTime.now().toString()}.jpg', Nfile);
+                              if(uploadTask == null){
+                                print('Null upload task');
+                                return;
+                              }
+
+
+                             final  imageUrl = await firebase_storage.TaskState.success;
+                              if(imageUrl == null){
+                                print('Null image URL');
+                                return;
+                              }
+
+                              print('Image url: $imageUrl');
+
+                              //Cloud Firestore
+                              //Place  - Title, description, utl userOwner, likes.
+                              userBloc.updatePlaceData(Place(
+                                name:_controllerTitlePlace.text,
+                                description: _controllerDescriptionPlace.text,
+                                likes: 0,
+                                //urlImage: imageUrl,
+
+                              )
+
+                              ).whenComplete(() {
+                                print("Termino");
+                                Navigator.pop(context);
+
+                              });
+
+
 
                           }
 
-                        });
 
-                        //Cloud Firestore
-                        //Place  - Title, description, utl userOwner, likes.
-                        userBloc.updatePlaceData(Place(
-                        name:_controllerTitlePlace.text,
-                        description: _controllerDescriptionPlace.text,
-                        likes: 0,
-
-                        )
-
-                        ).whenComplete(() {
-                          print("Termino");
-                          Navigator.pop(context);
 
                         });
+
+
 
 
                       },
