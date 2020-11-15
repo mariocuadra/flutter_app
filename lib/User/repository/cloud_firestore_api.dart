@@ -44,9 +44,13 @@ class CloudFirestoreAPI{
        'name': place.name,
        'description' : place.description,
        'likes' : place.likes,
+       'urlImage' : place.urlImage,
        'userOwner' : "${USERS}/${currUser.uid}" //referencia
 
-     });
+     })
+         .then((value) => print("Place Added"))
+         .catchError((error) => print("Failed to add place: $error"));
+
 
   }
 

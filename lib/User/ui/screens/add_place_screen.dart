@@ -131,24 +131,14 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                           if (user != null){
 
                               String uid = user.uid;
-                              String path ="${uid}/${DateTime.now().toString()}.jpg";
-
                               File Nfile= File(widget.image.path);
-
-                              final uploadTask = await userBloc.uploadFile('$uid/${DateTime.now().toString()}.jpg', Nfile);
-                              if(uploadTask == null){
-                                print('Null upload task');
-                                return;
-                              }
+                              String urlImage ="'$uid/${DateTime.now().toString()}.jpg'";
+                              final uploadTask = await userBloc.uploadFile(urlImage, Nfile).then((snapshot)  {
+                                      print('Uploaded a blob or file!');
 
 
-                             final  imageUrl = await firebase_storage.TaskState.success;
-                              if(imageUrl == null){
-                                print('Null image URL');
-                                return;
-                              }
+                              });
 
-                              print('Image url: $imageUrl');
 
                               //Cloud Firestore
                               //Place  - Title, description, utl userOwner, likes.
@@ -156,7 +146,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                                 name:_controllerTitlePlace.text,
                                 description: _controllerDescriptionPlace.text,
                                 likes: 0,
-                                //urlImage: imageUrl,
+                                urlImage: urlImage,
 
                               )
 

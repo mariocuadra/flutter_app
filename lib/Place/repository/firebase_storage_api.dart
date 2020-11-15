@@ -1,20 +1,13 @@
-import 'dart:html';
-
+import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class FirebaseStorageAPI{
+import 'firebase_storage_repository.dart';
 
-  final firebase_storage.Reference _storageReference = firebase_storage.FirebaseStorage.instance.ref();
+class FirebaseStorageRespository{
 
-  Future<firebase_storage.UploadTask> uploadFile (String path) async {
+  final _firebaseStorageAPI = FirebaseStorageAPI();
 
-    File firebase_storage.UploadTask storageUploadTask = _storageReference.child(path).putFile(image,"image/jpeg");
-
-
-
-
-
-  }
+  Future<firebase_storage.Reference> uploadFile (String path, File image) => _firebaseStorageAPI.uploadFile(path, image);
 
 
 
