@@ -36,7 +36,7 @@ class CloudFirestoreAPI{
 
     final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    CollectionReference places = FirebaseFirestore.instance.collection('places');
+    CollectionReference places = FirebaseFirestore.instance.collection("${PLACE}");
 
     final User currUser = _auth.currentUser; /*Extraigo el usuario actual de la sesion*/
 
@@ -45,12 +45,20 @@ class CloudFirestoreAPI{
        'description' : place.description,
        'likes' : place.likes,
        'urlImage' : place.urlImage,
-       'userOwner' : "${USERS}/${currUser.uid}" //referencia
+       'userOwner' : places.doc("${USERS}/${currUser.uid}"), //referencia
 
      })
-         .then((value) => print("Place Added"))
-         .catchError((error) => print("Failed to add place: $error"));
+         .then((DocumentReference dr) {
+          dr.get().then((DocumentSnapshot snapshot) {
+            snapshot.id; //Id place referencia Array
+            DocumentReference refUsers = FirebaseFirestore.instance.collection("${USERS}").doc(currUser.uid) as DocumentReference;
+            refUsers.update({
+              'myPlaces' : FieldValue.arrayUnion([places.doc("${PLACE}/${snapshot.id}")])
 
+            });
+
+          });
+    });
 
   }
 
