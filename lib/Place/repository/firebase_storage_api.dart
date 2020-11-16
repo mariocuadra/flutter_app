@@ -1,28 +1,13 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class FirebaseStorageAPI{
+import 'firebase_storage_repository.dart';
 
-  final firebase_storage.Reference _storageReference = firebase_storage.FirebaseStorage.instance.ref();
+class FirebaseStorageRespository{
 
-  Future<firebase_storage.Reference> uploadFile (String path, File image) async {
+  final _firebaseStorageAPI = FirebaseStorageAPI();
 
-    if (image == null){
-
-      print("No fue posible subir el archivo");
-      return null;
-
-    }
-    _storageReference.child(path).putFile(image);
-    print("creo la ruta de la imagen $path");
-
-    return _storageReference;
-
-
-
-
-  }
+  Future<firebase_storage.Reference> uploadFile (String path, File image) => _firebaseStorageAPI.uploadFile(path, image);
 
 
 
