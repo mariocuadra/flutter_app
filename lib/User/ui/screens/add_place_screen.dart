@@ -105,7 +105,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   ),
                 ),
                 TextInput( // Description
-                  hintText:"Description",
+                  hintText:"Detalle",
                   inputType: TextInputType.multiline,
                   maxLines: 4,
                   controller: _controllerDescriptionPlace,
@@ -135,27 +135,21 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
 
                               File Nfile= File(widget.image.path);
 
-                              final uploadTask = await userBloc.uploadFile('$uid/${DateTime.now().toString()}.jpg', Nfile);
-                              if(uploadTask == null){
-                                print('Null upload task');
-                                return;
-                              }
+                              var uploadTask = await userBloc.uploadFile('$uid/${DateTime.now().toString()}.jpg', Nfile);
 
 
-                             final  imageUrl = await firebase_storage.TaskState.success;
-                              if(imageUrl == null){
-                                print('Null image URL');
-                                return;
-                              }
 
-                              print('Image url: $imageUrl');
+
+
+
 
                               //Cloud Firestore
                               //Place  - Title, description, utl userOwner, likes.
-                              userBloc.updatePlaceData(Place(
+                                userBloc.updatePlaceData(Place(
                                 name:_controllerTitlePlace.text,
                                 description: _controllerDescriptionPlace.text,
                                 likes: 0,
+                                urlImage:  "",
                                 //urlImage: imageUrl,
 
                               )
