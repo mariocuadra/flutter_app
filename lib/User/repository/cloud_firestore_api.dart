@@ -45,10 +45,9 @@ class CloudFirestoreAPI{
        'description' : place.description,
        'likes' : place.likes,
        'urlImage' : place.urlImage,
-       'userOwner' : places.doc("${USERS}/${currUser.uid}"), //referencia
+       'userOwner' : places.doc(currUser.uid) //referencia
 
-     })
-         .then((DocumentReference dr) {
+     });/*.then((DocumentReference dr) {
           dr.get().then((DocumentSnapshot snapshot) {
             snapshot.id; //Id place referencia Array
             DocumentReference refUsers = FirebaseFirestore.instance.collection("${USERS}").doc(currUser.uid) as DocumentReference;
@@ -58,7 +57,7 @@ class CloudFirestoreAPI{
             });
 
           });
-    });
+    });*/
 
   }
 
