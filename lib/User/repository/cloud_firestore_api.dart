@@ -15,7 +15,7 @@ class CloudFirestoreAPI{
 
   Future<void> addUser(UserAttribute user) async {
 
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference users = FirebaseFirestore.instance.collection("${USERS}").doc(user.uid) as CollectionReference;
 
     return await users.add({
               'uid': user.uid,
@@ -38,24 +38,32 @@ class CloudFirestoreAPI{
 
     CollectionReference places = FirebaseFirestore.instance.collection("${PLACE}");
 
+    CollectionReference users = FirebaseFirestore.instance.collection("${USERS}");
+
     final User currUser = _auth.currentUser; /*Extraigo el usuario actual de la sesion*/
 
-     return await places.add({
+   return await places.add({
        'name': place.name,
        'description' : place.description,
        'likes' : place.likes,
        'urlImage' : place.urlImage,
-       'userOwner' : places.doc("${USERS}/${currUser.uid}"), //referencia
+       'userOwner' : users.doc(currUser.uid)  //places.doc(currUser.uid), //referencia del usuario
 
+    
      })
          .then((DocumentReference dr) {
-          dr.get().then((DocumentSnapshot snapshot) {
-            snapshot.id; //Id place referencia Array
-            DocumentReference refUsers = FirebaseFirestore.instance.collection("${USERS}").doc(currUser.uid) as DocumentReference;
-            refUsers.update({
-              'myPlaces' : FieldValue.arrayUnion([places.doc("${PLACE}/${snapshot.id}")])
+           dr.get().then((DocumentSnapshot snapshot) {
+           DocumentReference placeref=snapshot.reference; //Id place referencia Arra*/
+           
 
-            });
+           DocumentReference refUsers = users.doc(currUser.uid) ;//_auth.currentUser.uid as DocumentReference;
+
+           print(" referencia $refUsers.id");
+
+            refUsers.update({
+              'myPlaces' : FieldValue.arrayUnion([placeref])
+
+            }).catchError((error) => print("Failed to add reference: $error"));
 
           });
     });
