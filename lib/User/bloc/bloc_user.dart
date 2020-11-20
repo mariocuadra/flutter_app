@@ -1,15 +1,18 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/Place/repository/firebase_storage_api.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
 import 'package:flutter_app/User/repository/auth_repository.dart';
+import 'package:flutter_app/User/repository/cloud_firestore_api.dart';
 import 'package:flutter_app/User/repository/cloud_firestore_repository.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 
 import '../../place.dart';
+import '../../profile_place.dart';
 
 
 class UserBloc implements Bloc{
@@ -51,9 +54,16 @@ class UserBloc implements Bloc{
 
  /*Registrar lugares visitados por el usuario*/
   Future<void> updatePlaceData(Place place) => _cloudFirestoreRepository.updatePlaceData(place);
+ // PlacesListStream es poner en escucha
+  Stream<QuerySnapshot> placesListStream = FirebaseFirestore.instance.collection(CloudFirestoreAPI().PLACE).snapshots(); //es una foto a la base de datos
+ // se define otro stream para acceder a la escucha y poder reflejar la foto.
+
+  Stream<QuerySnapshot> get placesStream => placesListStream; // este permite escuchar.
+
+  List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot)  => _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+
 
   final _firebaseStorageRepository = FirebaseStorageRespository();
-
   Future<firebase_storage.Reference> uploadFile (String path, File image) => _firebaseStorageRepository.uploadFile(path, image);
 
 
