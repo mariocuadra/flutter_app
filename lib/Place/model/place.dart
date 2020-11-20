@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
 
@@ -7,7 +8,7 @@ class Place {
   String descripcion;
   String urlImage;
   int likes;
-  UserAttribute UserOwner;
+  DocumentReference UserOwner;
 
   Place(
       {Key key,
