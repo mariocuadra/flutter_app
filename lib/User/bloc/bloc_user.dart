@@ -64,8 +64,7 @@ class UserBloc implements Bloc{
 
 
   final _firebaseStorageRepository = FirebaseStorageRespository();
-  Future<firebase_storage.Reference> uploadFile (String path, File image) => _firebaseStorageRepository.uploadFile(path, image);
-
+  Future<String> uploadFile (String path, File image) => _firebaseStorageRepository.uploadFile(path, image);
 
   signOut(){
 

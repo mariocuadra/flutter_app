@@ -4,28 +4,40 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class FirebaseStorageAPI{
 
-  final firebase_storage.Reference _storageReference = firebase_storage.FirebaseStorage.instance.ref();
+
+  Future<String> uploadFile (String path, File image) async {
+
+    String imageUrl= 'Hola mundo';
+
+    firebase_storage.Reference _storageReference = firebase_storage.FirebaseStorage.instance.ref();
 
 
-  Future<firebase_storage.Reference> uploadFile (String path, File image) async {
+    firebase_storage.UploadTask uploadTask =_storageReference.child(path).putFile(image);
 
-    if (image == null){
+    uploadTask.whenComplete(() async{
 
-      print("No fue posible subir el archivo");
-      return null;
+      try{
 
-    }
-    _storageReference.child(path).putFile(image);
+        imageUrl = await uploadTask.storage.ref(path).getDownloadURL();
 
-    print("creo la ruta de la imagen $path");
+        return imageUrl;
 
-    return _storageReference;
+        //return imageUrlBack;
+      }catch(onError){
 
+        print("Error");
+      }
 
+      return imageUrl;
 
+    });
+
+    return imageUrl;
 
   }
 
-
-
 }
+
+
+/*
+*/
