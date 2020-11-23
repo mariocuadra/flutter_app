@@ -2,12 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'User/bloc/bloc_user.dart';
+import 'User/model/user_attribute.dart';
 import 'profile_place.dart';
 import 'place.dart';
 
 class ProfilePlacesList extends StatelessWidget {
 
   UserBloc userBloc;
+  UserAttribute _userAttribute;
+  ProfilePlacesList(@required this._userAttribute);
+
 
   Place place = new Place(
     name: "Knuckles Mountains Range",
@@ -35,7 +39,7 @@ class ProfilePlacesList extends StatelessWidget {
           bottom: 10.0
       ),
       child:StreamBuilder(
-        stream: userBloc.placesListStream,
+        stream: userBloc.myPlacesListStream(_userAttribute.uid),
         builder:  (context, AsyncSnapshot snapshot){
 
           if (snapshot != null ) {

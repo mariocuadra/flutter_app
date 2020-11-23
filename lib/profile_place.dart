@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'place.dart';
 import 'profile_place_info.dart';
@@ -9,6 +10,7 @@ class ProfilePlace extends StatelessWidget {
   Place place;
 
   ProfilePlace(this.place);
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,8 @@ class ProfilePlace extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.cover,
-              image: NetworkImage(place.urlImage)
+              image: NetworkImage(place.urlImage),
+
           ),
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
           color: Colors.red,
@@ -41,6 +44,7 @@ class ProfilePlace extends StatelessWidget {
       children: <Widget>[
         photoCard,
         ProfilePlaceInfo(place)
+
       ],
     );
   }

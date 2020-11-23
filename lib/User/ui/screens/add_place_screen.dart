@@ -133,9 +133,22 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                               String uid = user.uid;
                               File Nfile= File(widget.image.path);
 
-                              String urlImage ="'$uid/${DateTime.now().toString()}.jpg'";
-                              final uploadTask = await userBloc.uploadFile(urlImage, Nfile).then((snapshot)  {
-                                      print('Uploaded a blob or file!');
+                              String urlImage ='${uid}/${DateTime.now().toString()}.jpg';
+                              final uploadTask = await userBloc.uploadFile(urlImage, Nfile)
+
+
+                                 /* .then((firebase_storage.Reference _storageReference)  {
+
+
+
+                                     _storageReference.storage.ref(urlImage).getDownloadURL().then((urlImage) {
+
+                                      print("URLIMAGE : ${urlImage}");
+
+                                    });*/
+
+
+
 
 
                               });
