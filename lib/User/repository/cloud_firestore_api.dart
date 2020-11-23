@@ -47,7 +47,7 @@ class CloudFirestoreAPI {
       'description': place.description,
       'likes': place.likes,
       'urlImage': place.urlImage,
-      'userOwner': places.doc(currUser.uid) //referencia
+      'userOwner': '${USERS}/${currUser.uid}', //referencia
 
     }).then((DocumentReference dr) {
       dr.get().then((DocumentSnapshot snapshot) {

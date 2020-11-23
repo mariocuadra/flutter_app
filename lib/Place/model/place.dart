@@ -8,7 +8,7 @@ class Place {
   String descripcion;
   String urlImage;
   int likes;
-  DocumentReference UserOwner;
+  String UserOwner;
 
   Place(
       {Key key,

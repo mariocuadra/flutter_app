@@ -8,7 +8,7 @@ class Place {
   String description;
   String urlImage;
   int likes;
-  UserAttribute userOwner;
+  String userOwner;
 
   Place({
     Key key,

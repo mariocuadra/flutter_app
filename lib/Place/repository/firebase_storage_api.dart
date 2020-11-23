@@ -7,7 +7,7 @@ class FirebaseStorageRespository{
 
   final _firebaseStorageAPI = FirebaseStorageAPI();
 
-  Future<firebase_storage.Reference> uploadFile (String path, File image) => _firebaseStorageAPI.uploadFile(path, image);
+  Future<String> uploadFile (String path, File image) => _firebaseStorageAPI.uploadFile(path, image);
 
 
 
