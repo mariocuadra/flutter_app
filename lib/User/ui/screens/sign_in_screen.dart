@@ -4,7 +4,6 @@ import 'package:flutter_app/User/bloc/bloc_user.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
 import 'package:flutter_app/User/repository/firebase_auth_api.dart';
 import 'package:flutter_app/platzi_trips_cupertino.dart';
-import 'package:flutter_app/users_info.dart';
 import 'package:flutter_app/widgets/gradient_back.dart';
 import 'package:flutter_app/widgets/button_green.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';

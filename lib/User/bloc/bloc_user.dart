@@ -39,7 +39,6 @@ class UserBloc implements Bloc{
 
   Future<User> signIn() {
 
-
     return _auth_repository.signInFirebase();
 
   }
