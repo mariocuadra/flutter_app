@@ -150,6 +150,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
 
                           userBloc.currentUsuario().then((User user) async {
                             String uid = user.uid;
+
+
                             if (user != null) {
                               String uid = user.uid;
 
@@ -186,9 +188,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                                     description: _controllerDescriptionPlace.text,
                                     likes: 0,
                                     urlImage: imageUrl,
-                                    userOwner: user.uid,
 
-                                  )
+                                  ),
 
                                   ).whenComplete(() {
                                     print("Termino");

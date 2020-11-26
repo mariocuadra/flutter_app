@@ -1,6 +1,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
@@ -39,19 +40,29 @@ class CloudFirestoreAPI {
     CollectionReference places = FirebaseFirestore.instance.collection("${PLACE}");
     CollectionReference users = FirebaseFirestore.instance.collection("${USERS}");
 
-    final User currUser = _auth
-        .currentUser; /*Extraigo el usuario actual de la sesion*/
+
+    final User currUser = _auth.currentUser; /*Extraigo el usuario actual de la sesion*/
+
+    String userOwner;
+
+    userOwner ='${USERS}/${currUser.uid}';
 
     return await places.add({
+
+
       'name': place.name,
       'description': place.description,
       'likes': place.likes,
       'urlImage': place.urlImage,
-      'userOwner': '${USERS}/${currUser.uid}', //referencia
+      'userOwner' : places.firestore.doc(userOwner), /*Cambia*/
+
+
 
     }).then((DocumentReference dr) {
       dr.get().then((DocumentSnapshot snapshot) {
+
         DocumentReference placeref=snapshot.reference; //Id place referencia Arra*/
+
 
         DocumentReference refUsers = users.doc(currUser.uid) ;//_auth.currentUser.uid as DocumentReference;
 
