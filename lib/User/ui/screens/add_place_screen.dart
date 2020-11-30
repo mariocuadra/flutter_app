@@ -6,6 +6,7 @@ import 'package:flutter_app/User/bloc/bloc_user.dart';
 import 'package:flutter_app/User/ui/screens/title_input_location.dart';
 import 'package:flutter_app/card_image.dart';
 import 'package:flutter_app/place.dart';
+import 'package:flutter_app/widgets/button_dropdown.dart';
 import 'package:flutter_app/widgets/button_purple.dart';
 import 'package:flutter_app/widgets/gradient_back.dart';
 import 'package:flutter_app/widgets/text_input.dart';
@@ -31,6 +32,8 @@ AddPlaceScreen({
 }
 
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
+
+
 
   ProgressDialog pr;
 
@@ -66,6 +69,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     double left =0.0;
     final _controllerTitlePlace = TextEditingController();
     final _controllerDescriptionPlace = TextEditingController();
+    final _controllerCountryPlace = TextEditingController();
+    final _controllerCityPlace = TextEditingController();
 
 
     double screenWidht = MediaQuery.of(context).size.width;
@@ -131,6 +136,12 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   maxLines: 4,
                   controller: _controllerDescriptionPlace,
                 ),
+            Container(
+              child: ButtonDropDown(
+
+
+              ),
+            ),
                 Container(
                   margin: EdgeInsets.only(top: 20.0),
                   child: TextInputLocation(
@@ -154,6 +165,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
 
                             if (user != null) {
                               String uid = user.uid;
+
+
 
                               File file = File(widget.image.path);
                               String path = '$uid/${DateTime.now()
