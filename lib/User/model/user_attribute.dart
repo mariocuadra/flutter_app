@@ -22,6 +22,6 @@ class UserAttribute {
         @required this.email,
         @required this.photoUrl,
         this.myPlaces,
-        this.myFavoritePlaces
+        this.myFavoritePlaces,
       });
 }

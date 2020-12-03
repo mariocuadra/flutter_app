@@ -12,7 +12,7 @@ import '../../place.dart';
 class CloudFirestoreAPI {
 
   final String USERS = 'users';
-  final String PLACE = "places";
+  final String PLACE = 'places';
 
 
   Future<void> addUser(UserAttribute user) async {
@@ -76,6 +76,8 @@ class CloudFirestoreAPI {
       });
     });
   }
+
+
 
   List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot){
 

@@ -137,17 +137,21 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   controller: _controllerDescriptionPlace,
                 ),
             Container(
+              margin: EdgeInsets.only(top:20.0),
               child: ButtonDropDown(
+
+
+
 
 
               ),
             ),
                 Container(
-                  margin: EdgeInsets.only(top: 20.0),
+               /*   margin: EdgeInsets.only(top: 20.0),
                   child: TextInputLocation(
                     hintText:"Add location" ,
                     iconData: Icons.location_on,
-                  ),
+                  ),*/
                 ),
                   Container(
                     width: 70.0,
