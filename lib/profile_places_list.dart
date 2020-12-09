@@ -42,6 +42,8 @@ class ProfilePlacesList extends StatelessWidget {
         stream: userBloc.myPlacesListStream(_userAttribute.uid),
         builder:  (context, AsyncSnapshot snapshot){
 
+          print(snapshot.data.documents);
+
           if (snapshot != null ) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:

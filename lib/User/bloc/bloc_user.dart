@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app/Country/model/country.dart';
 import 'package:flutter_app/Place/repository/firebase_storage_api.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
 import 'package:flutter_app/User/repository/auth_repository.dart';
@@ -61,11 +62,21 @@ class UserBloc implements Bloc{
 
   List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot)  => _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
 
-  Stream<QuerySnapshot> myPlacesListStream(String uid) =>
+      Stream<QuerySnapshot> myPlacesListStream(String uid) =>
       FirebaseFirestore.instance.collection(CloudFirestoreAPI().PLACE)
       .where("userOwner", isEqualTo: FirebaseFirestore.instance.doc("${CloudFirestoreAPI().USERS}/${uid}"))
       .snapshots();
 
+  // rescata la informacion de los paises desde firebase.
+
+
+  Stream<QuerySnapshot> myCountryListStream()=>
+      FirebaseFirestore.instance.collection(CloudFirestoreAPI().COUNTRY).snapshots();
+
+  Stream<QuerySnapshot> myCityListStream(String uid)=>
+      FirebaseFirestore.instance.collection(CloudFirestoreAPI().CITY)
+      .where("uidCountryRef", isEqualTo: FirebaseFirestore.instance.doc("${CloudFirestoreAPI().COUNTRY}/${uid}"))
+      .snapshots();
 
 
   final _firebaseStorageRepository = FirebaseStorageRespository();

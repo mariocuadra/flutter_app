@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Country/model/country.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
 import 'package:flutter_app/profile_place.dart';
 
@@ -12,7 +13,8 @@ class CloudFirestoreAPI {
 
   final String USERS = 'users';
   final String PLACE = "places";
-
+  final String COUNTRY ="country";
+  final String CITY ="city";
 
   Future<void> addUser(UserAttribute user) async {
     DocumentReference users = FirebaseFirestore.instance.collection("${USERS}").doc(user.uid);
@@ -84,4 +86,28 @@ class CloudFirestoreAPI {
 
     return profilePlaces;
   }
+
+List<Country> listCountry(List<DocumentSnapshot> countryListSnapshot){
+
+    List<Country> countryList = List<Country>();
+    countryListSnapshot.forEach((element) {
+
+
+        countryList.add(Country(
+
+          id: element.data()['id'],
+          name: element.data()['name'],
+
+
+        ),
+      );
+
+    });
+
+    return countryList;
+}
+
+
+
+
 }

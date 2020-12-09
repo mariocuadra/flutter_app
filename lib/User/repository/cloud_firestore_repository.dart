@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app/Country/model/country.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
 import 'package:flutter_app/User/repository/cloud_firestore_api.dart';
 
@@ -15,6 +16,8 @@ class CloudFirestoreRepository{
 
 
   List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot) => _cloudfirestoreApi.buildPlaces(placesListSnapshot);
+
+
 
 
 

@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Country/model/country.dart';
 import 'package:flutter_app/User/bloc/bloc_user.dart';
 import 'package:flutter_app/User/ui/screens/title_input_location.dart';
 import 'package:flutter_app/card_image.dart';
@@ -33,13 +35,36 @@ AddPlaceScreen({
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
 
   ProgressDialog pr;
+  bool disabledropdown =true;
+  var _selectedCountry;
+  var _selectedCity;
 
   @override
 
 
 
+
+
+  void valueChangedCountry(_value){
+
+    setState(() {
+      _selectedCountry =_value;
+    });
+  }
+
+
+  void valueChangedCity(_value){
+
+    setState(() {
+      _selectedCity =_value;
+      disabledropdown=false;
+    });
+  }
+
   Widget build(BuildContext context) {
-  /*Progress indicator*/
+
+
+    /*Progress indicator*/
 
     pr = new ProgressDialog(context);
     pr.style(
@@ -131,14 +156,101 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   maxLines: 4,
                   controller: _controllerDescriptionPlace,
                 ),
-                Container(
+
+
+                /*Container(
                   margin: EdgeInsets.only(top: 20.0),
                   child: TextInputLocation(
                     hintText:"Add location" ,
                     iconData: Icons.location_on,
                   ),
                 ),
+                Paises*/
+
                   Container(
+                    child: StreamBuilder(
+                    stream: userBloc.myCountryListStream(),
+                    builder:  (context, AsyncSnapshot snapshot) {
+                      if (snapshot != null) {
+                        List<DropdownMenuItem> countryItems = [];
+
+
+                        for (int i = 0; i < snapshot.data.docs.length; i++) {
+                          DocumentSnapshot snap = snapshot.data.docs[i];
+
+                          countryItems.add(
+                            DropdownMenuItem(
+                              child: Text(
+                                snap.get(
+                                    'Pais'), //Tengo que llamar al campo de firebase
+                              ),
+                              value: "${snap.id}",
+
+                            ),
+                          );
+                        }
+                        return new DropdownButton(
+
+                          items: countryItems,
+                          onChanged: (_selectedCountry )=> valueChangedCountry(_selectedCountry),
+                          isExpanded: false,
+                          hint: Text(
+                              "Select Country"
+                          ),
+                        );
+                      }
+                    }
+                   ),
+
+                  ),
+                //Ciudades
+                Container(
+                  child: StreamBuilder(
+
+                      stream: userBloc.myCityListStream(_selectedCountry),
+                      builder:  (context, AsyncSnapshot snapshot) {
+
+                        if (snapshot != null) {
+
+                          List<DropdownMenuItem> cityItems = [];
+
+
+                          for (int i = 0; i < snapshot.data.docs.length; i++) {
+                            DocumentSnapshot snap = snapshot.data.docs[i];
+
+                            cityItems.add(
+                              DropdownMenuItem(
+                                child: Text(
+                                  snap.get('Ciudad'), //Tengo que llamar al campo de firebase
+                                ),
+                                value: "${snap.id}",
+
+                              ),
+                            );
+
+                          }
+                          return new DropdownButton(
+
+                            items: cityItems,
+                            onChanged: ( _selectedCity)=> valueChangedCity(_selectedCity),
+                            
+                            isExpanded: false,
+                            hint: Text(
+                              "Select City"
+                            ),
+                            disabledHint: Text(
+                              "Select country first"
+                            ),
+                          );
+                        }
+                      }
+                  ),
+
+                ),
+
+
+
+                Container(
                     width: 70.0,
                     child:ButtonPurple(
                       buttonText: "Add Place",
