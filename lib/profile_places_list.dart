@@ -39,7 +39,7 @@ class ProfilePlacesList extends StatelessWidget {
           bottom: 10.0
       ),
       child:StreamBuilder(
-        stream: userBloc.myPlacesListStream(_userAttribute.uid),
+        stream: userBloc.myPlacesListStream(_userAttribute.uid), //userBloc.myPlacesListStream("users/1Ega9Q3FCJXweqc0t9aGM6bW2Na2"),
         builder:  (context, AsyncSnapshot snapshot){
 
           print(snapshot.data.documents);

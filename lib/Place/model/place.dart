@@ -7,6 +7,8 @@ class Place {
   String urlImage;
   int likes;
   String UserOwner;
+  String pais;
+  String ciudad;
 
   Place(
       {Key key,
@@ -14,5 +16,7 @@ class Place {
       @required this.descripcion,
       this.urlImage,
       this.likes,
-      this.UserOwner});
+      this.UserOwner,
+      this.pais,
+      this.ciudad});
 }

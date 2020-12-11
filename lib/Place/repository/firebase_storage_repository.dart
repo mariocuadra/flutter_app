@@ -20,7 +20,7 @@ class FirebaseStorageAPI{
 
         imageUrl = await uploadTask.storage.ref(path).getDownloadURL();
 
-        return imageUrl;
+         return imageUrl;
 
         //return imageUrlBack;
       }catch(onError){
