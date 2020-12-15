@@ -1,8 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Country/model/country.dart';
+import 'package:flutter_app/User/bloc/bloc_user.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 
 class ButtonDropDown extends StatefulWidget {
+
+  String  country;
+  String city;
+
+
+
+  List<DropdownMenuItem> countryItems = [];
+  ButtonDropDown({ Key key, @required this.country, this.city
+
+    });
+
+
 
 
   @override
@@ -13,61 +28,50 @@ class ButtonDropDown extends StatefulWidget {
 
 class _ButtonDropDownState extends State<ButtonDropDown> {
 
+  List<Country> _dropdownItems = [];
 
-  @override
-  Widget build(BuildContext context) {
-    var _selectedCountry;
-    final String USERS = 'users';
-    List<DropdownMenuItem> countryItems = [];
+ List<Country> initLoad() {
 
-    StreamBuilder<QuerySnapshot>(
+    UserBloc userBloc =BlocProvider.of<UserBloc>(context);
 
-      stream: FirebaseFirestore.instance.collection("${USERS}").snapshots(),
-      builder: (context, snapshot){
+    StreamBuilder(
+        stream: userBloc.myCountryListStream(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
-        if(!snapshot.hasData){
+          for (int i = 0; i < snapshot.data.docs.length; i++) {
+            DocumentSnapshot snap = snapshot.data.docs[i];
 
-          Text("Loading");
+            _dropdownItems[i].id=snap.id;
+            _dropdownItems[i].name=snap.get('Pais');
 
-        } else {
 
-          for (int i=0; i< snapshot.data.docs.length;i++){
-
-            DocumentSnapshot snap= snapshot.data.docs[i];
-
-                print(snap.id);
-                countryItems.add(
-                DropdownMenuItem(
-                  child: Text(
-                    snap.id,
-                  ),
-                  value: "${snap.id}",
-
-                ));
           }
 
 
         }
-      },
     );
+        return _dropdownItems;
 
-    return Container(
+  }
+
+  List<DropdownMenuItem<Country>> buildDropDownMenuItems(List listItems) {
+    List<DropdownMenuItem<Country>> items = List();
+    for (Country listItem in listItems) {
+      items.add(
+        DropdownMenuItem(
+          child: Text(listItem.name),
+          value: listItem,
+        ),
+      );
+    }
+    return items;
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
 
 
-       child: DropdownButton(
-          items: countryItems ,
-          onChanged: (countryValue){
-            setState(() {
-              _selectedCountry = countryValue;
-            });
-          },
-         value: _selectedCountry ,
-         isExpanded: false,
-      ),
 
-     );
   }
 }
-
-

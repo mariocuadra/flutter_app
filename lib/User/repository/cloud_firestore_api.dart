@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Country/model/country.dart';
 import 'package:flutter_app/User/model/user_attribute.dart';
+import 'package:flutter_app/card_image.dart';
 import 'package:flutter_app/profile_place.dart';
 
 import '../../place.dart';
@@ -86,6 +87,33 @@ class CloudFirestoreAPI {
 
     return profilePlaces;
   }
+
+  List<CardImageWithFabIcon> buildCardPlaces(List<DocumentSnapshot> placesListSnapshot){
+
+    List<CardImageWithFabIcon> placesCard = List<CardImageWithFabIcon>();
+
+    double width =300.0;
+    double height =350.0;
+    double left =20.0;
+    IconData iconData = Icons.favorite_border;
+
+    placesListSnapshot.forEach((element) { // recorre el elemento de firebase
+
+      placesCard.add(CardImageWithFabIcon(
+      pathImage:element.data()['urlImage'] ,
+      widght: width,
+      height: height,
+      left: left,
+      onPressedFabIcon: (){
+
+      },
+      iconData: iconData,
+    ));
+    });
+  }
+
+
+
 
 List<Country> listCountry(List<DocumentSnapshot> countryListSnapshot){
 
